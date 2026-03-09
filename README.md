@@ -244,9 +244,5 @@ price_data = pd.read_csv('futures_prices.csv').values
 
 ---
 
-## 📧 联系
 
-- **姓名：** 王成龙 (Chenglong Wang)
-- **邮箱：** [your-email@example.com]
-- **GitHub：** [your-github]
-- **LinkedIn：** [your-linkedin]
+
