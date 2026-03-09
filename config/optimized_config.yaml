@@ -1,0 +1,234 @@
+# 优化后的项目配置
+# 版本: 2.0.0
+# 创建时间: 2026-03-05
+
+# 环境配置
+environment:
+  name: "quant-research"
+  version: "2.0.0"
+  python_version: "3.9+"
+  description: "优化后的量化研究项目配置"
+
+# 性能优化配置
+performance:
+  # 计算优化
+  computation:
+    use_gpu: true
+    mixed_precision: true
+    num_threads: 4
+    batch_size: 64
+    
+  # 内存优化
+  memory:
+    use_memory_mapping: true
+    cache_size_mb: 1024
+    garbage_collection_interval: 1000
+    
+  # 并行计算
+  parallel:
+    enabled: true
+    num_processes: 4
+    backend: "multiprocessing"  # multiprocessing, threading, joblib
+
+# 模型优化配置
+model_optimization:
+  # GAT模型优化
+  gat:
+    hidden_channels: 128
+    num_heads: 8
+    dropout_rate: 0.2
+    learning_rate: 0.001
+    weight_decay: 5e-4
+    use_batch_norm: true
+    
+  # 期权定价优化
+  option_pricing:
+    num_paths: 100000
+    num_steps: 252
+    variance_reduction:
+      - antithetic_variates
+      - control_variates
+      - importance_sampling
+    parallel_simulation: true
+    
+  # RL模型优化
+  rl:
+    algorithm: "PPO"
+    learning_rate:
+      actor: 0.0003
+      critic: 0.001
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_epsilon: 0.2
+    entropy_coef: 0.01
+
+# 数据管理优化
+data_management:
+  # 数据加载
+  loading:
+    chunk_size: 10000
+    prefetch_factor: 2
+    shuffle_buffer_size: 1000
+    
+  # 数据缓存
+  caching:
+    enabled: true
+    cache_dir: "./data/cache"
+    max_cache_size_gb: 10
+    
+  # 数据验证
+  validation:
+    enabled: true
+    schema_validation: true
+    range_validation: true
+    outlier_detection: true
+
+# 训练优化配置
+training_optimization:
+  # 早停配置
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+    restore_best_weights: true
+    
+  # 学习率调度
+  lr_scheduling:
+    scheduler: "cosine_annealing"
+    warmup_epochs: 5
+    t_max: 100
+    eta_min: 1e-6
+    
+  # 模型检查点
+  checkpointing:
+    enabled: true
+    save_freq: "epoch"
+    monitor: "val_loss"
+    mode: "min"
+    save_best_only: true
+
+# 监控和日志
+monitoring:
+  # 日志配置
+  logging:
+    level: "INFO"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file: "./logs/quant_research.log"
+    rotation: "1 day"
+    
+  # 指标监控
+  metrics:
+    track_training_metrics: true
+    track_memory_usage: true
+    track_gpu_usage: true
+    track_computation_time: true
+    
+  # 可视化
+  visualization:
+    enabled: true
+    real_time_plots: true
+    save_figures: true
+    figure_format: "png"
+    dpi: 150
+
+# 测试配置
+testing:
+  # 单元测试
+  unit_tests:
+    coverage_threshold: 0.8
+    run_on_commit: true
+    
+  # 集成测试
+  integration_tests:
+    enabled: true
+    test_data_size: 1000
+    
+  # 性能测试
+  performance_tests:
+    enabled: true
+    benchmark_baseline: "current"
+    performance_targets:
+      training_time: "< 30min"
+      inference_time: "< 100ms"
+      memory_usage: "< 2GB"
+
+# 部署配置
+deployment:
+  # Docker配置
+  docker:
+    base_image: "python:3.9-slim"
+    expose_ports: [8000, 8080]
+    volumes: ["./data:/app/data"]
+    
+  # API配置
+  api:
+    enabled: true
+    framework: "fastapi"
+    host: "0.0.0.0"
+    port: 8000
+    docs_url: "/docs"
+    
+  # CI/CD配置
+  cicd:
+    provider: "github_actions"
+    test_on_push: true
+    deploy_on_tag: true
+    environments: ["staging", "production"]
+
+# 风险管理配置
+risk_management:
+  # 风险限额
+  limits:
+    max_position_size: 0.1
+    max_drawdown: 0.15
+    var_confidence: 0.95
+    stop_loss: 0.05
+    
+  # 压力测试
+  stress_testing:
+    enabled: true
+    scenarios:
+      - name: "market_crash"
+        volatility_multiplier: 3.0
+      - name: "high_volatility"
+        volatility_multiplier: 2.0
+      - name: "liquidity_crisis"
+        spread_multiplier: 5.0
+
+# 开发工具配置
+development_tools:
+  # 代码质量
+  code_quality:
+    linter: "flake8"
+    formatter: "black"
+    type_checker: "mypy"
+    
+  # 文档生成
+  documentation:
+    generator: "sphinx"
+    theme: "sphinx_rtd_theme"
+    autoapi: true
+    
+  # 版本控制
+  version_control:
+    branch_strategy: "gitflow"
+    commit_message_format: "conventional"
+    pr_template: true
+
+# 环境变量（示例，实际使用时需要设置）
+environment_variables:
+  DATA_PATH: "./data"
+  MODEL_PATH: "./models"
+  LOG_LEVEL: "INFO"
+  CUDA_VISIBLE_DEVICES: "0"
+
+# 作者信息
+author:
+  name: "王成龙 (Chenglong Wang)"
+  email: "chenglong.wang@example.com"
+  github: "sheldonwangchenglong-jackie"
+
+# 许可证
+license: "MIT"
+version: "2.0.0"
+last_updated: "2026-03-05"
